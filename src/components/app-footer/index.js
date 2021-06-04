@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { Fragment, memo } from 'react'
 
 import { FooterWrapper, FooterLeft, FooterRight } from './style'
 import { footerLeftLinks, footerRightLinks } from '@/common/local-data.js'
@@ -6,10 +6,10 @@ import { footerLeftLinks, footerRightLinks } from '@/common/local-data.js'
 export default memo(function FFFAppHeader() {
   function footerAccord(item, index) {
     return (index < 5 && (
-      <>
-        <a href={item.link} key={index}>{item.title}</a>
+      <Fragment key={index}>
+        <a href={item.link}>{item.title}</a>
         <span>|</span>
-      </>
+      </Fragment>
     ))
   }
 
@@ -18,19 +18,19 @@ export default memo(function FFFAppHeader() {
     (index === 7 || index === 10) ?
       result = index >= 5 &&
       (item.link ?
-        (<><a href={item.link} key={index}>{item.title}</a><br /></>) :
-        (<><span>{item.title}</span><br /></>)) :
+        (<Fragment key={index}><a href={item.link}>{item.title}</a><br /></Fragment>) :
+        (<Fragment key={index}><span>{item.title}</span><br /></Fragment>)) :
       result = index >= 5 &&
       (item.link ?
         (<a href={item.link} key={index}>{item.title}</a>) :
-        (<span>{item.title}</span>))
+        (<span key={index}>{item.title}</span>))
     return result
   }
 
   function footerRightFun(item, index) {
     return (
-      <div>
-        <a href={item.link} key={index}> </a>
+      <div key={index}>
+        <a href={item.link}> </a>
         <span>{item.title}</span>
       </div>
     )

@@ -1,7 +1,9 @@
 import styled from 'styled-components'
 
 export const FooterWrapper = styled.div`
+  padding: 15px;
   background-color: #F2F2F2;
+  border-top: 1px solid #D3D3D3;
   .wrap-v2{
     display: flex;
     height: 172px;
@@ -35,7 +37,7 @@ export const FooterLeft = styled.div`
 export const FooterRight = styled.div`
   flex: 1;
   display: flex;
-  margin-top: 33px;
+  margin-top: 18px;
     div {
       flex: 1;
       margin: 0 auto;

@@ -1,7 +1,8 @@
+// 头部固定数据
 export const headerLinks = [
   {
     title: "发现音乐",
-    link: '/'
+    link: '/discover'
   },
   {
     title: "我的音乐",
@@ -25,6 +26,7 @@ export const headerLinks = [
   }
 ]
 
+// 尾部固定数据
 export const footerLeftLinks = [
   {
     title: "服务条款",
@@ -101,4 +103,8 @@ export const footerRightLinks = [
     title: "视频奖励",
     link: 'https://music.163.com/uservideo#/plan'
   }
+]
+
+export const TopMeauNames = [
+  "推荐", "排行榜", "歌单", "主播电台", "歌手", "新媒上架"
 ]
