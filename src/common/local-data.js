@@ -108,3 +108,26 @@ export const footerRightLinks = [
 export const TopMeauNames = [
   "推荐", "排行榜", "歌单", "主播电台", "歌手", "新媒上架"
 ]
+
+export const HotRecommendKeywords = [
+  {
+    name: '华语',
+    link: '/discover/songs'
+  },
+  {
+    name: '流行',
+    link: '/discover/songs'
+  },
+  {
+    name: '摇滚',
+    link: '/discover/songs'
+  },
+  {
+    name: '民谣',
+    link: '/discover/songs'
+  },
+  {
+    name: '电子',
+    link: '/discover/songs'
+  }
+]
