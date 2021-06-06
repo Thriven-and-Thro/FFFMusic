@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { Fragment, memo } from 'react'
 import { NavLink } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
@@ -16,12 +16,12 @@ function FFFThemeHeaderRcm(props) {
           {
             keywords.map((item, index) => {
               return (
-                <>
-                  <NavLink to={item.link} key={item.name}>
+                <Fragment key={item.name}>
+                  <NavLink to={item.link}>
                     {item.name}
                   </NavLink>
                   <span>|</span>
-                </>
+                </Fragment>
               )
             })
           }

@@ -27,7 +27,6 @@ export default memo(function FFFDiscover(props) {
           }
         </div>
       </TopMeau>
-
       {renderRoutes(route.routes)}
     </DiscoverWarpper>
   )
