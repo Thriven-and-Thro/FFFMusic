@@ -32,7 +32,7 @@ FFFSongsCover.propTypes = {
 
 FFFSongsCover.defaultProps = {
   songMessages: {
-    picUrl: putSizeImg('http://s4.music.126.net/style/web2/img/default/default_avatar.jpg', 140),
+    picUrl: 'http://s4.music.126.net/style/web2/img/default/default_avatar.jpg',
     playCount: 9.9e8,
     name: "出错了~",
     id: 0

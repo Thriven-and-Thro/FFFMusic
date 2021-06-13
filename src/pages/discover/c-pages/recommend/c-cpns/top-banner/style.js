@@ -10,9 +10,13 @@ export const TopBannerWrapper = styled.div`
     .carousel{
       width: 730px;
       .banner-item{
+        position: relative;
         display: block;
-        text-align: center;
+        height: 285px;
         img{
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
           height: 285px;
         }
       }
