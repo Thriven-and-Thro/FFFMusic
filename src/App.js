@@ -5,6 +5,7 @@ import { Provider } from 'react-redux'
 
 import FFFAppHeader from '@/components/app-header'
 import FFFAppFooter from '@/components/app-footer'
+import FFFAppPlayBar from '@/pages/player/app-player-bar'
 import routes from '@/router'
 import store from '@/store'
 
@@ -16,6 +17,7 @@ export default memo(function App() {
         {/* 使用路由 */}
         {renderRoutes(routes)}
         <FFFAppFooter />
+        <FFFAppPlayBar />
       </HashRouter>
     </Provider>
   )

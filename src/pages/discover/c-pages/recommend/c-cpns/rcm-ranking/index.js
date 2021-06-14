@@ -23,7 +23,6 @@ export default memo(function FFFRcmRanking() {
     originRanking: state.getIn(["recommend", "originRanking"])
   }), shallowEqual)
 
-  console.log(upRanking);
 
   return (
     <RcmRanking>
