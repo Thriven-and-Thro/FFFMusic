@@ -35,7 +35,7 @@ export const AppPlayBarWrapper = styled.div`
           background-position: 0 -130px;
         }
         &:nth-child(2){
-          background-position: 0 -204px;
+          background-position: ${props => props.playing ? "0 -165px" : "0 -204px"} ;
           width: 36px;
           height: 36px;
         }
