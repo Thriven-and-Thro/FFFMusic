@@ -102,7 +102,7 @@ export const TopRankingWrapper = styled.div`
             width: 96px;
           }
           .tracks-btn{
-            z-index: 9999;
+            z-index: 999;
           }
         }
       }

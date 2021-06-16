@@ -4,6 +4,7 @@ import { Redirect } from 'react-router'
 import FFFDiscover from '@/pages/discover'
 import FFFMine from '@/pages/mine'
 import FFFFriend from '@/pages/friend'
+import FFFPlayer from '@/pages/player'
 
 import FFFRecommend from '@/pages/discover/c-pages/recommend'
 import FFFSongs from '@/pages/discover/c-pages/songs'
@@ -44,7 +45,7 @@ const routes = [
         component: FFFRanking
       },
       {
-        path: "/discover/songs",
+        path: "/discover/playlist",
         component: FFFSongs
       },
       {
@@ -58,6 +59,10 @@ const routes = [
       {
         path: "/discover/album",
         component: FFFAlbum
+      },
+      {
+        path: "/discover/songs",
+        component: FFFPlayer
       }
     ]
   },

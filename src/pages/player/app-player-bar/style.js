@@ -13,6 +13,7 @@ export const AppPlayBarWrapper = styled.div`
   height: 53px;
   background-position: 0 0;
   background-repeat: repeat;
+  z-index:9999;
 
   .content{
     display: flex;
@@ -91,17 +92,20 @@ export const AppPlayBarWrapper = styled.div`
 
           .ant-slider{
             margin: 0;
+            padding: 0;
             width: 466px;
             .ant-slider-rail{
+              height: 9px;
               background: url(${require("@/assets/img/progress_bar.png").default}) right -30px no-repeat;
             }
             .ant-slider-track{
+              height: 9px;
               background: url(${require("@/assets/img/progress_bar.png").default}) left -66px no-repeat;
             }
             .ant-slider-handle{
               width: 20px;
-              height: 16px;
-              background: url(${require("@/assets/img/sprite_icon.png").default}) -1px -253px no-repeat;
+              height: 20px;
+              background: url(${require("@/assets/img/sprite_icon.png").default}) -1px -252px no-repeat;
               border: none;
             }
           }
@@ -153,7 +157,7 @@ export const AppPlayBarWrapper = styled.div`
           background-position: -2px -248px;
         }
         &:nth-child(2){
-          background-position: -3px -344px;
+          background-position: ${props => props.sequence === 0 ? "-3px -344px" : (props.sequence === 1 ? "-66px -248px" : "-66px -344px")};
         }
         &:nth-child(3){
           width: 59px;

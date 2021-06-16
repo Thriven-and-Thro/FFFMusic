@@ -11,7 +11,7 @@ function FFFSongsCover(props) {
   return (
     <SongsCoverWrapper>
       <div className="top">
-        <NavLink to={`/songs?id=${songMessages.id}`} className="top-img">
+        <NavLink to={`/playlist?id=${songMessages.id}`} className="top-img">
           <div className="glass sprite_covor"></div>
           <img src={putSizeImg(songMessages.picUrl, 140)} alt=""></img>
         </NavLink>
@@ -19,7 +19,7 @@ function FFFSongsCover(props) {
       </div>
       <div className="bottom">
         <div>
-          <NavLink to={`/songs?id=${songMessages.id}`}>{songMessages.name}</NavLink>
+          <NavLink to={`/playlist?id=${songMessages.id}`}>{songMessages.name}</NavLink>
         </div>
       </div>
     </SongsCoverWrapper>

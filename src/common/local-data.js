@@ -112,22 +112,22 @@ export const TopMeauNames = [
 export const HotRecommendKeywords = [
   {
     name: '华语',
-    link: '/discover/songs'
+    link: '/discover/playlist'
   },
   {
     name: '流行',
-    link: '/discover/songs'
+    link: '/discover/playlist'
   },
   {
     name: '摇滚',
-    link: '/discover/songs'
+    link: '/discover/playlist'
   },
   {
     name: '民谣',
-    link: '/discover/songs'
+    link: '/discover/playlist'
   },
   {
     name: '电子',
-    link: '/discover/songs'
+    link: '/discover/playlist'
   }
 ]

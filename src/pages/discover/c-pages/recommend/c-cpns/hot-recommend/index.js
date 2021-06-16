@@ -22,7 +22,7 @@ export default memo(function FFFHotRecommend() {
 
   return (
     <HotRecommendWrapper>
-      <FFFThemeHeaderRcm title="热门推荐" keywords={HotRecommendKeywords} titleLink='/discover/songs/' />
+      <FFFThemeHeaderRcm title="热门推荐" keywords={HotRecommendKeywords} titleLink='/discover/playlist/' />
       <div className="songs-list">
         {
           hotRecommend.map((item, index) => {

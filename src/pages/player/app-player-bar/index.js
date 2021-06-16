@@ -5,7 +5,7 @@ import { Slider } from 'antd';
 import { putSizeImg, formatMinuteSecond, getPlaySong } from '@/utils/formate-util'
 
 import { AppPlayBarWrapper } from './style'
-import { getSongDetailAction } from '../store/actionCreators'
+import { changeCurrentSong, changeSequenceAction, getSongDetailAction } from '../store/actionCreators'
 import { useRef } from 'react';
 
 export default memo(function FFFAppPlayBar() {
@@ -17,8 +17,9 @@ export default memo(function FFFAppPlayBar() {
     dispatch(getSongDetailAction(1327341487))
   }, [dispatch])
 
-  const { currentSong } = useSelector(state => ({
-    currentSong: state.getIn(["player", "currentSong"])
+  const { currentSong, sequence } = useSelector(state => ({
+    currentSong: state.getIn(["player", "currentSong"]),
+    sequence: state.getIn(["player", "sequence"])
   }), shallowEqual)
 
   const [currentTime, setcurrentTime] = useState(0)
@@ -36,10 +37,15 @@ export default memo(function FFFAppPlayBar() {
 
   useEffect(() => {
     audioRef.current.src = getPlaySong(currentSong.id)
+    audioRef.current.play().then(res => {
+      setplaying(true)
+    }).catch(err => {
+      setplaying(false)
+    })
   }, [currentSong])
 
   // 播放事件
-  const playMusic = () => {
+  const playMusic = useCallback(() => {
     if (!playing) {
       audioRef.current.play()
       setplaying(true)
@@ -47,7 +53,7 @@ export default memo(function FFFAppPlayBar() {
       audioRef.current.pause()
       setplaying(false)
     }
-  }
+  }, [playing])
 
   const timeUpdate = (e) => {
     if (!changing) {
@@ -69,32 +75,53 @@ export default memo(function FFFAppPlayBar() {
     let currentTime = value / 100 * dt / 1000
     audioRef.current.currentTime = currentTime
     setcurrentTime(currentTime * 1000)
-
     if (!playing) playMusic()
-
     setchanging(false)
   }, [dt, playing, playMusic])
 
+  // 切换播放模式
+  const changeSequence = () => {
+    let currentSequence = sequence + 1
+    if (currentSequence > 2) currentSequence = 0
+    dispatch(changeSequenceAction(currentSequence))
+  }
+
+  // 上下切歌
+  const changeMusic = (tag) => {
+    setcurrentTime(0)
+    dispatch(changeCurrentSong(tag))
+  }
+
+  // 自动下一首
+  const handleMusicEnded = () => {
+    if (sequence === 2) {
+      setcurrentTime(0)
+      audioRef.current.play()
+    } else {
+      changeMusic(1)
+    }
+  }
+
   return (
-    <AppPlayBarWrapper className="sprite_player" playing={playing}>
+    <AppPlayBarWrapper className="sprite_player" playing={playing} sequence={sequence}>
       <div className="content">
 
         <div className="btn">
-          <button className="sprite_player"></button>
+          <button className="sprite_player" onClick={e => changeMusic(-1)}></button>
           <button className="sprite_player" onClick={e => playMusic()}></button>
-          <button className="sprite_player"></button>
+          <button className="sprite_player" onClick={e => changeMusic(1)}></button>
         </div>
 
         <div className="play">
           <div className="play-img">
             <img src={putSizeImg(al.picUrl, 34)} alt=""></img>
-            <a href={"songs?id=" + currentSong.id} className="sprite_player glass">glass</a>
+            <a href={"#/discover/songs?id=" + currentSong.id} className="sprite_player glass">glass</a>
           </div>
 
           <div className="play-message">
             <div className="play-header">
-              <a href={"songs?id=" + currentSong.id} className="play-header-name">{currentSong.name}</a>
-              <a href={"artist?id=" + ar[0].id} className="play-header-author">{ar[0].name}</a>
+              <a href={"#/discover/songs?id=" + currentSong.id} className="play-header-name">{currentSong.name}</a>
+              <a href={"#/discover/artist?id=" + ar[0].id} className="play-header-author">{ar[0].name}</a>
             </div>
 
             <div className="play-slider">
@@ -120,12 +147,12 @@ export default memo(function FFFAppPlayBar() {
 
         <div className="flag">
           <button className="sprite_player"></button>
-          <button className="sprite_player"></button>
+          <button className="sprite_player" onClick={e => changeSequence()}></button>
           <button className="sprite_player"></button>
         </div>
 
       </div>
-      <audio ref={audioRef} onTimeUpdate={timeUpdate}></audio>
+      <audio ref={audioRef} onTimeUpdate={e => timeUpdate(e)} onEnded={e => handleMusicEnded()}></audio>
     </AppPlayBarWrapper>
   )
 })
