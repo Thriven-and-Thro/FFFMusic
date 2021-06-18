@@ -1,11 +1,11 @@
 import React, { memo, useCallback, useEffect, useState } from 'react'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
-import { Slider } from 'antd';
+import { Slider, message } from 'antd';
 
 import { putSizeImg, formatMinuteSecond, getPlaySong } from '@/utils/formate-util'
 
 import { AppPlayBarWrapper } from './style'
-import { changeCurrentSong, changeSequenceAction, getSongDetailAction } from '../store/actionCreators'
+import { changeCurrentSong, changeSequenceAction, getSongDetailAction, changeLyricIndexAction } from '../store/actionCreators'
 import { useRef } from 'react';
 
 export default memo(function FFFAppPlayBar() {
@@ -17,9 +17,11 @@ export default memo(function FFFAppPlayBar() {
     dispatch(getSongDetailAction(1327341487))
   }, [dispatch])
 
-  const { currentSong, sequence } = useSelector(state => ({
+  const { currentSong, sequence, lyricList, currentLyricIndex } = useSelector(state => ({
     currentSong: state.getIn(["player", "currentSong"]),
-    sequence: state.getIn(["player", "sequence"])
+    sequence: state.getIn(["player", "sequence"]),
+    lyricList: state.getIn(["player", "lyricList"]),
+    currentLyricIndex: state.getIn(["player", "currentLyricIndex"])
   }), shallowEqual)
 
   const [currentTime, setcurrentTime] = useState(0)
@@ -61,6 +63,26 @@ export default memo(function FFFAppPlayBar() {
       setcurrentTime(e.target.currentTime * 1000);
       // 计算进度
       setprogress(currentTime / dt * 100)
+    }
+
+    // 获取当前歌词
+    let i = 0
+    for (; i < lyricList.length; i++) {
+      let lyricItem = lyricList[i]
+      if (currentTime < lyricItem.time) {
+        break
+      }
+    }
+
+    // 保存当前歌词位置
+    if (currentLyricIndex !== i) {
+      dispatch(changeLyricIndexAction(i))
+      message.open({
+        content: lyricList[currentLyricIndex] && lyricList[currentLyricIndex].content,
+        key: 'lyric',
+        duration: 0,
+        className: "lyric-style",
+      })
     }
   }
 

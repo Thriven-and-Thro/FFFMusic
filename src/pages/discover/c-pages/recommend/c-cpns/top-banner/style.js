@@ -20,6 +20,16 @@ export const TopBannerWrapper = styled.div`
           height: 285px;
         }
       }
+      .slick-dots{
+        .slick-active{
+          button{
+            background-color: #C20C0C;
+          }
+        }
+        button{
+          height: 5px;
+        }
+      }
     }
     .download{
       position: relative;

@@ -150,3 +150,22 @@ button {
   background-color: rgba(0, 0, 0, 0.5);
   color: #fff;
 }
+
+.lyric-style .ant-message-notice-content {
+  position: fixed;
+  color: #eee;
+  font-weight: 700;
+  font-size: 18px;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.spin-div {
+  margin: 100px auto;
+  text-align: center;
+}
+.spin-div .ant-spin-dot-item {
+  background-color: #c20c0c;
+}

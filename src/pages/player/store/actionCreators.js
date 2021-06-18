@@ -48,6 +48,7 @@ export const changeCurrentSong = (tag) => {
     const currentSong = playList[currentIndex]
     dispatch(changeCurrentSongAction(currentSong))
     dispatch(changeCurrentIndexAction(currentIndex))
+    dispatch(getLyricAction(currentSong.id))
   }
 }
 
@@ -78,6 +79,7 @@ export const getSongDetailAction = (ids) => {
     }
   }
 }
+
 export const getLyricAction = (id) => {
   return dispatch => {
     getLyric(id).then(res => {
@@ -86,3 +88,8 @@ export const getLyricAction = (id) => {
     })
   }
 }
+
+export const changeLyricIndexAction = (currentLyricIndex) => ({
+  type: actionTypes.CHANGE_CURRENT_LYRIC_INDEX,
+  currentLyricIndex
+})

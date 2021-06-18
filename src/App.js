@@ -1,7 +1,8 @@
-import React, { memo } from 'react'
+import React, { memo, Suspense } from 'react'
 import { HashRouter } from 'react-router-dom'
 import { renderRoutes } from 'react-router-config'
 import { Provider } from 'react-redux'
+import { Spin } from 'antd';
 
 import FFFAppHeader from '@/components/app-header'
 import FFFAppFooter from '@/components/app-footer'
@@ -14,8 +15,16 @@ export default memo(function App() {
     <Provider store={store}>
       <HashRouter>
         <FFFAppHeader />
-        {/* 使用路由 */}
-        {renderRoutes(routes)}
+        <Suspense fallback={
+          (
+            <div className="spin-div">
+              <Spin size="large" wrapperClassName="spin" />
+            </div>
+          )
+        }>
+          {/* 使用路由 */}
+          {renderRoutes(routes)}
+        </Suspense>
         <FFFAppFooter />
         <FFFAppPlayBar />
       </HashRouter>

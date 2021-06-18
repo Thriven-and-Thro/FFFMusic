@@ -1,18 +1,17 @@
 import React from 'react'
 import { Redirect } from 'react-router'
 
-import FFFDiscover from '@/pages/discover'
-import FFFMine from '@/pages/mine'
-import FFFFriend from '@/pages/friend'
-import FFFPlayer from '@/pages/player'
+const FFFDiscover = React.lazy(() => import('@/pages/discover'))
+const FFFMine = React.lazy(() => import('@/pages/mine'))
+const FFFFriend = React.lazy(() => import('@/pages/friend'))
+const FFFPlayer = React.lazy(() => import('@/pages/player'))
 
-import FFFRecommend from '@/pages/discover/c-pages/recommend'
-import FFFSongs from '@/pages/discover/c-pages/songs'
-import FFFRanking from '@/pages/discover/c-pages/ranking'
-import FFFDjradio from '@/pages/discover/c-pages/djradio'
-import FFFAlbum from '@/pages/discover/c-pages/album'
-import FFFArtist from '@/pages/discover/c-pages/artist'
-
+const FFFRecommend = React.lazy(() => import('@/pages/discover/c-pages/recommend'))
+const FFFSongs = React.lazy(() => import('@/pages/discover/c-pages/songs'))
+const FFFRanking = React.lazy(() => import('@/pages/discover/c-pages/ranking'))
+const FFFDjradio = React.lazy(() => import('@/pages/discover/c-pages/djradio'))
+const FFFAlbum = React.lazy(() => import('@/pages/discover/c-pages/album'))
+const FFFArtist = React.lazy(() => import('@/pages/discover/c-pages/artist'))
 
 const routes = [
   {
