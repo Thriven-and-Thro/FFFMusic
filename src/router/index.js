@@ -5,6 +5,7 @@ const FFFDiscover = React.lazy(() => import('@/pages/discover'))
 const FFFMine = React.lazy(() => import('@/pages/mine'))
 const FFFFriend = React.lazy(() => import('@/pages/friend'))
 const FFFPlayer = React.lazy(() => import('@/pages/player'))
+const FFFSearch = React.lazy(() => import('@/pages/search'))
 
 const FFFRecommend = React.lazy(() => import('@/pages/discover/c-pages/recommend'))
 const FFFSongs = React.lazy(() => import('@/pages/discover/c-pages/songs'))
@@ -72,6 +73,10 @@ const routes = [
   {
     path: '/frined',
     component: FFFFriend
+  },
+  {
+    path: '/search',
+    component: FFFSearch,
   }
 ]
 

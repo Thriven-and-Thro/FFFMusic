@@ -131,3 +131,7 @@ export const HotRecommendKeywords = [
     link: '/discover/playlist'
   }
 ]
+
+export const SearchTableHeader = [
+  "单曲", "歌手", "专辑", "视频", "歌词", "歌单", "声音主播", "用户"
+]
