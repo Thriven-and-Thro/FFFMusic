@@ -68,3 +68,22 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `yarn build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+### 具备的功能
+
+- 推荐页面
+- 推荐页面的歌曲播放
+- 播放功能
+- 显示歌词
+- 切歌
+- 播放模式
+
+### 计划拥有功能
+
+- 搜索
+- 模糊搜索
+- 歌曲详情
+- 歌手详情
+- 专辑详情
+- 自制登录表
+- 自制注册表
