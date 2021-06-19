@@ -87,3 +87,5 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 - 专辑详情
 - 自制登录表
 - 自制注册表
+
+## 该项目将会作为 React 练习项目进行长期维护和更新
