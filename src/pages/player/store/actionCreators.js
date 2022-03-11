@@ -65,9 +65,8 @@ export const getSongDetailAction = (ids) => {
       dispatch(getLyricAction(song.id))
     } else {
       getSongDetail(ids).then(res => {
-        const song = res.songs && res.songs[0]
+        const song = res && res.songs && res.songs[0]
         if (!song) return
-
         const newPlayList = [...playList]
         newPlayList.push(song)
 
@@ -83,7 +82,7 @@ export const getSongDetailAction = (ids) => {
 export const getLyricAction = (id) => {
   return dispatch => {
     getLyric(id).then(res => {
-      const lyrics = parseLyric(res.lrc.lyric)
+      const lyrics = parseLyric(res && res.lrc && res.lrc.lyric)
       dispatch(changeLyricList(lyrics))
     })
   }

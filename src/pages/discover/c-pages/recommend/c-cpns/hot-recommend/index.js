@@ -25,7 +25,7 @@ export default memo(function FFFHotRecommend() {
       <FFFThemeHeaderRcm title="热门推荐" keywords={HotRecommendKeywords} titleLink='/discover/playlist/' />
       <div className="songs-list">
         {
-          hotRecommend.map((item, index) => {
+          hotRecommend&&hotRecommend.map((item, index) => {
             return <FFFSongsCover key={index} songMessages={item} />
           })
         }

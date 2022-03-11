@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from 'react'
+import React, { memo, useEffect, useState, Fragment } from 'react'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 
 import { getSearch } from '@/servies/search'
@@ -8,7 +8,7 @@ import { getSongDetailAction } from '@/pages/player/store'
 import { SearchResult, ResultTable } from './style'
 import { SearchTableHeader } from '@/common/local-data'
 
-export default memo(function FFFSearchResult() {
+export default memo(function FFFSearchResult(props) {
   const [searchResult, setsearchResult] = useState([])
   const [currentIndex, setcurrentIndex] = useState(1)
 
@@ -19,6 +19,7 @@ export default memo(function FFFSearchResult() {
   }), shallowEqual)
 
   useEffect(() => {
+    if (searchValue === "") return
     getSearch(searchValue).then(res => {
       setsearchResult(res && res.result.songs)
     })
@@ -32,6 +33,7 @@ export default memo(function FFFSearchResult() {
   const searchPlay = (id) => {
     dispatch(getSongDetailAction(id))
   }
+
 
   return (
     <SearchResult>
@@ -53,22 +55,22 @@ export default memo(function FFFSearchResult() {
                 <div key={index} className="table-item">
                   <button className="sprite_table play" onClick={e => searchPlay(item.id)}></button>
                   <div className="table-item-name">
-                    <a href>{item.name}</a>
+                    <a href={`/#/songs?id=${item.id}`}>{item.name}</a>
                   </div>
                   <div className="table-item-artist">
                     {
-                      item.artists && item.artists.map((item, index) => {
+                      item.artists && item.artists.map((iten, index) => {
                         return (
-                          <>
-                            <a href>{item.name}</a>
-                            <span>|</span>
-                          </>
+                          <Fragment key={index}>
+                            <a href={`/#/artist?id=${iten.id}`}>{iten.name}</a>
+                            <span>/</span>
+                          </Fragment>
                         )
                       })
                     }
                   </div>
                   <div className="table-item-album">
-                    <a href>《{item.album && item.album.name}》</a>
+                    <a href={`/#/album?id=${item.album.id}`}>《{item.album && item.album.name}》</a>
                   </div>
                   <div className="table-item-time">{formatMinuteSecond(item.duration)}</div>
                 </div>

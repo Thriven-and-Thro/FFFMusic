@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useEffect, useState } from 'react'
+import React, { memo, useCallback, useEffect, useState, useRef } from 'react'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import { Slider, message } from 'antd';
 
@@ -6,28 +6,29 @@ import { putSizeImg, formatMinuteSecond, getPlaySong } from '@/utils/formate-uti
 
 import { AppPlayBarWrapper } from './style'
 import { changeCurrentSong, changeSequenceAction, getSongDetailAction, changeLyricIndexAction } from '../store/actionCreators'
-import { useRef } from 'react';
+import { MineSongList } from '@/common/local-data'
 
 export default memo(function FFFAppPlayBar() {
 
   // 获取数据三部曲
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    dispatch(getSongDetailAction(1327341487))
-  }, [dispatch])
-
-  const { currentSong, sequence, lyricList, currentLyricIndex } = useSelector(state => ({
+  const { currentSong, sequence, lyricList, currentLyricIndex, playList } = useSelector(state => ({
     currentSong: state.getIn(["player", "currentSong"]),
     sequence: state.getIn(["player", "sequence"]),
     lyricList: state.getIn(["player", "lyricList"]),
-    currentLyricIndex: state.getIn(["player", "currentLyricIndex"])
+    currentLyricIndex: state.getIn(["player", "currentLyricIndex"]),
+    playList: state.getIn(["player", "playList"])
   }), shallowEqual)
 
   const [currentTime, setcurrentTime] = useState(0)
   const [progress, setprogress] = useState(0)
   const [changing, setchanging] = useState(false)
   const [playing, setplaying] = useState(false)
+  // 音量
+  const [displayVoice, setdisplayVoice] = useState(false)
+  // 是否为第一次进入
+  const [startIn, setstartIn] = useState(true)
 
   // 默认值处理
   let al = (currentSong && currentSong.al) || "http://s4.music.126.net/style/web2/img/default/default_album.jpg"
@@ -37,6 +38,20 @@ export default memo(function FFFAppPlayBar() {
   // 获取audio标签
   const audioRef = useRef()
 
+  // 导入本地歌单
+  useEffect(() => {
+    // 当playList发生改变时（上一次添加成功）
+    // 是否第一次
+    if (startIn) {
+      if (playList.length === MineSongList.length) {
+        setstartIn(false)
+        return
+      }
+      dispatch(getSongDetailAction(MineSongList[playList.length]))
+    }
+  }, [dispatch, playList, startIn])
+
+  // 切歌时的重新渲染
   useEffect(() => {
     audioRef.current.src = getPlaySong(currentSong.id)
     audioRef.current.play().then(res => {
@@ -124,6 +139,14 @@ export default memo(function FFFAppPlayBar() {
     }
   }
 
+  // 调整音量
+  const changeVoice = () => {
+    setdisplayVoice(!displayVoice)
+  }
+  const voiceChange = (value) => {
+    audioRef.current.volume = value / 100
+  }
+
   return (
     <AppPlayBarWrapper className="sprite_player" playing={playing} sequence={sequence}>
       <div className="content">
@@ -143,7 +166,18 @@ export default memo(function FFFAppPlayBar() {
           <div className="play-message">
             <div className="play-header">
               <a href={"#/discover/songs?id=" + currentSong.id} className="play-header-name">{currentSong.name}</a>
-              <a href={"#/discover/artist?id=" + ar[0].id} className="play-header-author">{ar[0].name}</a>
+              <div className="play-header-author">
+                {
+                  ar.map((iten, index) => {
+                    return (
+                      <div key={index} className="play-header-author-item">
+                        <a href={`/#/artist?id=${iten.id}`}>{iten.name}</a>
+                        <span className="gan">/</span>
+                      </div>
+                    )
+                  })
+                }
+              </div>
             </div>
 
             <div className="play-slider">
@@ -168,9 +202,15 @@ export default memo(function FFFAppPlayBar() {
         </div>
 
         <div className="flag">
-          <button className="sprite_player"></button>
-          <button className="sprite_player" onClick={e => changeSequence()}></button>
-          <button className="sprite_player"></button>
+          <button className="sprite_player" onClick={e => changeVoice()}>
+            <Slider
+              vertical
+              defaultValue={100}
+              style={{ display: displayVoice ? 'block' : 'none' }}
+              onChange={voiceChange} />
+          </button>
+          <button className="sprite_player" onClick={e => changeSequence(e)}></button>
+          <button className="sprite_player">{playList.length}</button>
         </div>
 
       </div>

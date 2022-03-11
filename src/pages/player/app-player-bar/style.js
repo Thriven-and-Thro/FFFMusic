@@ -82,8 +82,16 @@ export const AppPlayBarWrapper = styled.div`
             color: #e8e8e8;
           }
           .play-header-author{
+            display: flex;
             margin-left: 15px;
             color: #9b9b9b;
+            .play-header-author-item:last-child span{
+              color: transparent
+            }
+            span {
+              padding: 0 5px;
+            }
+            
           }
         }
 
@@ -154,7 +162,23 @@ export const AppPlayBarWrapper = styled.div`
         width: 25px;
         height: 25px;
         &:nth-child(1){
+          position: relative;
           background-position: -2px -248px;
+          .ant-slider{
+            margin: 0;
+            height: 50px;
+            bottom: 70px;
+            left: 6px;
+            .ant-slider-rail{
+              background-color: #2B2B2B;
+            }
+            .ant-slider-track{
+              background-color: #C70C0C;
+            }
+            .ant-slider-handle{
+              border: solid 2px #C70C0C;
+            }
+          }
         }
         &:nth-child(2){
           background-position: ${props => props.sequence === 0 ? "-3px -344px" : (props.sequence === 1 ? "-66px -248px" : "-66px -344px")};

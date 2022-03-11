@@ -9,9 +9,9 @@ const defaultState = Map({
   hotRecommend: [],
   newDjradio: [],
 
-  upRanking: [],
-  newRanking: [],
-  originRanking: [],
+  upRanking: {},
+  newRanking: {},
+  originRanking: {},
 })
 
 function reducer(state = defaultState, action) {

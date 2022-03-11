@@ -135,3 +135,8 @@ export const HotRecommendKeywords = [
 export const SearchTableHeader = [
   "单曲", "歌手", "专辑", "视频", "歌词", "歌单", "声音主播", "用户"
 ]
+
+
+export const MineSongList = [
+  29393641, 65538, 27867449, 28481104, 65528, 64093, 66282
+]

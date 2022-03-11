@@ -2,34 +2,36 @@ import * as actionTypes from './constants'
 
 import { getTopBanners, getHotRecommend, getNewDjradio, getTopList } from '@/servies/recommend'
 
+
+
 const changeTopBannerAction = (res) => ({
   type: actionTypes.CHANGE_TOP_BANNERS,
-  topBanners: res.banners
+  topBanners: res && res.banners
 })
 
 const changeHotCommendAction = (res) => ({
   type: actionTypes.CHANGE_HOT_RECOMMEND,
-  hotRecommend: res.result
+  hotRecommend: res && res.result
 })
 
 const changeNewDjradioAction = (res) => ({
   type: actionTypes.CHANGE_NEW_DJRADIO,
-  newDjradio: res.albums
+  newDjradio: res && res.albums
 })
 
 const changeUpRankingAction = (res) => ({
   type: actionTypes.CHANGE_UP_RANKING,
-  upRanking: res.playlist
+  upRanking: res && res.playlist
 })
 
 const changeNewRankingAction = (res) => ({
   type: actionTypes.CHANGE_NEW_RANKING,
-  newRanking: res.playlist
+  newRanking: res && res.playlist
 })
 
 const changeOriginRankingAction = (res) => ({
   type: actionTypes.CHANGE_ORIGIN_RANKING,
-  originRanking: res.playlist
+  originRanking: res && res.playlist
 })
 
 export const getTopBannerAction = () => {

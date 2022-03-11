@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { memo, useRef } from 'react'
 import { withRouter } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Input } from 'antd';
@@ -12,6 +12,9 @@ export default withRouter(memo(function FFFSearchInput(props) {
 
   const dispatch = useDispatch()
 
+  const searchRef = useRef()
+
+
   const onSearch = (value) => {
     dispatch(changeSearchValue(value))
     return props.history.push(`/search/m/?s=${value}&type=1`)
@@ -19,7 +22,7 @@ export default withRouter(memo(function FFFSearchInput(props) {
 
   return (
     <SearchInput>
-      <Search onSearch={onSearch} className="input" />
+      <Search onSearch={onSearch} className="input" ref={searchRef} />
     </SearchInput>
   )
 }))
