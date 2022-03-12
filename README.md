@@ -89,3 +89,5 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 - 自制注册表
 
 ## 该项目将会作为 React 练习项目进行长期维护和更新
+
+# 提示：经用户 @Kwaiseec 的提示，该项目引入了1131个开源组件，存在18个漏洞。
